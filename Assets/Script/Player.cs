@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using UniRx.Triggers;
+using Hozuki;
 
 namespace GameJam.Sho
 {
@@ -80,6 +81,9 @@ namespace GameJam.Sho
 
         private PlayerSpriteController MotionController { get; set; } = null;
 
+        [SerializeField]
+        private float attackDelay = 0.5f;
+
         // Use this for initialization
         void Start()
         {
@@ -133,6 +137,7 @@ namespace GameJam.Sho
                 .Where(n => IsOnGround && Input.GetKeyDown(jump))
                 .Subscribe(_ =>
                 {
+                    Rigidbody.velocity = Vector2.zero;
                     Rigidbody.AddForce(Vector2.up * jumpPower);
                     MotionController.JumpStart();
                 }).AddTo(this);
@@ -154,16 +159,20 @@ namespace GameJam.Sho
                 .Where(_ => Input.GetKeyDown(attack))
                 .Subscribe(_ =>
                 {
-                    var shuriken = CreateNewItem<Shuriken>(shurikenPrefab);
+                    this.DelayMethod(attackDelay, () =>
+                    {
+                        var shuriken = CreateNewItem<Shuriken>(shurikenPrefab);
 
-                    var d = Vector2.right;
-                    d.x = (int)CurrentDirection;
-                    shuriken.Rigidbody.AddForce(d * shurikenThrowPower);
+                        var d = Vector2.right;
+                        d.x = (int)CurrentDirection;
+                        shuriken.Rigidbody.AddForce(d * shurikenThrowPower);
 
-                    // temp
-                    GameObject.Destroy(shuriken, 5.0f);
+                        // temp
+                        GameObject.Destroy(shuriken, 5.0f);
 
-                    AttackByShuriken.Play();
+                        AttackByShuriken.Play();
+                    });
+                    MotionController.Attack();
                 }).AddTo(this);
 
             // Creating Wind
@@ -171,8 +180,12 @@ namespace GameJam.Sho
                 .Where(_ => Input.GetKeyDown(windAttack))
                 .Subscribe(_ =>
                 {
-                    CreateNewItem<Wind>(windPrefab);
-                    AttackByWind.Play();
+                    this.DelayMethod(attackDelay, () =>
+                    {
+                        CreateNewItem<Wind>(windPrefab);
+                        AttackByWind.Play();
+                    });
+                    MotionController.Attack();
                 }).AddTo(this);
 
             // temp 当たったオブジェクトが地面かどうかを監視する Check Hitting Object is Ground
