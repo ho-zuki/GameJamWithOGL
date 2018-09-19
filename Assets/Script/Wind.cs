@@ -16,10 +16,10 @@ namespace GameJam.Sho
         private Vector2 offset = new Vector2(2, 0);
         public Vector2 Offset => offset;
 
+        private PlayerStatus PlayerStatus { get; set; } = null;
+
         void Start()
         {
-            GameObject.Destroy(this.gameObject, lifeTimer);
-
             this.OnTriggerStay2DAsObservable()
                 .Select(n => n.GetComponent<StandObjectOnWind>())
                 .Where(n => n != null)
@@ -29,6 +29,7 @@ namespace GameJam.Sho
                     n.Rigidbody.AddForce(v.normalized * power);
                 }).AddTo(this);
 
+            PlayerStatus = GameObject.Find("Player").GetComponent<PlayerStatus>();
             var se = this.GetComponent<AudioSource>();
             se.Play();
             this.OnDestroyAsObservable()
@@ -36,6 +37,13 @@ namespace GameJam.Sho
                 {
                     se.Stop();
                 }).AddTo(this);
+            GameObject.Destroy(this.gameObject, lifeTimer);
+        }
+
+        void OnDestroy()
+        {
+            Debug.Log($"WindDead{PlayerStatus.CurrentWindCount}");
+            PlayerStatus.CurrentWindCount--;
         }
     }
 }

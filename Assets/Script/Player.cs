@@ -95,6 +95,8 @@ namespace GameJam.Sho
 
             WalkSound.pitch *= 2.0f;
 
+            var status = this.GetComponent<PlayerStatus>();
+
             // 移動の処理/ For Move
             this.FixedUpdateAsObservable()
                 .Subscribe(_ =>
@@ -180,12 +182,14 @@ namespace GameJam.Sho
                 .Where(_ => Input.GetKeyDown(windAttack))
                 .Subscribe(_ =>
                 {
+                    if (status.WindMax <= status.CurrentWindCount) return;
                     this.DelayMethod(attackDelay, () =>
                     {
                         CreateNewItem<Wind>(windPrefab);
                         AttackByWind.Play();
                     });
                     MotionController.Attack();
+                    status.CurrentWindCount++;
                 }).AddTo(this);
 
             // temp 当たったオブジェクトが地面かどうかを監視する Check Hitting Object is Ground

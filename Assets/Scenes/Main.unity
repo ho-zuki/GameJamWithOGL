@@ -196,6 +196,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 299593154}
+  - component: {fileID: 299593155}
   m_Layer: 5
   m_Name: WindCount
   m_TagString: Untagged
@@ -218,9 +219,23 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 179, y: 208}
+  m_AnchoredPosition: {x: 32, y: 208}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &299593155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 299593153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a28e165cebd7d340b24b2130c0bbeb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  windPrefab: {fileID: 1794871413413876, guid: f0ee4cfa8201f424b974438313afb487, type: 2}
+  interval: 30
+  Winds: []
 --- !u!1001 &351543821
 Prefab:
   m_ObjectHideFlags: 0
@@ -497,24 +512,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &752008809 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1847784802991520, guid: e0cd6ae54ce4c8348b88f5180e3733b0,
-    type: 2}
-  m_PrefabInternal: {fileID: 773231235}
---- !u!114 &752008818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 752008809}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ada965600e7376c439715317025f2d07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 10
-  windMax: 5
 --- !u!1001 &773231235
 Prefab:
   m_ObjectHideFlags: 0
@@ -553,15 +550,6 @@ Prefab:
     - target: {fileID: 4613025820812212, guid: e0cd6ae54ce4c8348b88f5180e3733b0, type: 2}
       propertyPath: m_RootOrder
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 212865533952682604, guid: e0cd6ae54ce4c8348b88f5180e3733b0,
-        type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 0394bcd86b031524fb06bc8d6f8eebb2, type: 2}
-    - target: {fileID: 1847784802991520, guid: e0cd6ae54ce4c8348b88f5180e3733b0, type: 2}
-      propertyPath: m_TagString
-      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0cd6ae54ce4c8348b88f5180e3733b0, type: 2}
