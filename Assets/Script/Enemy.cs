@@ -23,7 +23,7 @@ namespace GameJam.Sho
         private int state;
         private bool attack;
 
-        int timer;
+        float timer;
         float speed;
 
 
@@ -66,22 +66,22 @@ namespace GameJam.Sho
             {
                 // 左右移動 / For Move
                 case (int)(Attack_Type.E_LEFT):
-                    ++timer;
+                    timer += Time.deltaTime;
                     speed = -movespeed;
                     break;
 
                 case (int)(Attack_Type.E_RIGHT):
-                    ++timer;
+                    timer += Time.deltaTime;
                     speed = movespeed;
                     break;
 
                 case (int)(Attack_Type.E_TAG_LEFT):
-                    ++timer;
+                    timer += Time.deltaTime;
                     speed = -0.1f;
                     break;
 
                 case (int)(Attack_Type.E_TAG_RIGHT):
-                    ++timer;
+                    timer += Time.deltaTime;
                     speed = 0.1f;
                     break;
 
@@ -97,14 +97,14 @@ namespace GameJam.Sho
 
 
             // 突進攻撃終了 / Rush Attack End
-            if (attack && timer >= 60)
+            if (attack && timer >= 1)
             {
                 attack = false;
                 if (state == (int)(Attack_Type.E_TAG_LEFT)) state = (int)(Attack_Type.E_RIGHT);
                 else if (state == (int)(Attack_Type.E_TAG_RIGHT)) state = (int)(Attack_Type.E_LEFT);
             }
             // 移動向き反転
-            else if (timer >= 60 + Random.Range(0, 20))
+            else if (timer >= 1 + Random.Range(0, 0.05f))
             {
                 if (state == (int)(Attack_Type.E_LEFT)) state = (int)(Attack_Type.E_RIGHT);
                 else if (state == (int)(Attack_Type.E_RIGHT)) state = (int)(Attack_Type.E_LEFT);
