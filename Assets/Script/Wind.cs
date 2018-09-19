@@ -42,7 +42,6 @@ namespace GameJam.Sho
 
         void OnDestroy()
         {
-            Debug.Log($"WindDead{PlayerStatus.CurrentWindCount}");
             PlayerStatus.CurrentWindCount--;
         }
     }

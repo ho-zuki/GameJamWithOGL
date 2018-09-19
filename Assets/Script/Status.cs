@@ -22,6 +22,7 @@ namespace GameJam.Sho
                 else _HpChangedEvent.OnNext(hp);
             }
         }
+        public int MAXHP { get; set; } = 0;
 
         private ISubject<int> _HpChangedEvent { get; set; } = new Subject<int>();
         public IObservable<int> HPChangedEvent => _HpChangedEvent;
@@ -33,6 +34,7 @@ namespace GameJam.Sho
         void Start()
         {
             HP = hp;
+            MAXHP = HP;
         }
     }
 }

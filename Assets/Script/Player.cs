@@ -183,11 +183,8 @@ namespace GameJam.Sho
                 .Subscribe(_ =>
                 {
                     if (status.WindMax <= status.CurrentWindCount) return;
-                    this.DelayMethod(attackDelay, () =>
-                    {
-                        CreateNewItem<Wind>(windPrefab);
-                        AttackByWind.Play();
-                    });
+                    CreateNewItem<Wind>(windPrefab);
+                    AttackByWind.Play();
                     MotionController.Attack();
                     status.CurrentWindCount++;
                 }).AddTo(this);

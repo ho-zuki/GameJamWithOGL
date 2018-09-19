@@ -44,7 +44,6 @@ namespace GameJam.Sho
                     }
                     Winds.Clear();
 
-                    Debug.Log(playerStatus.WindMax - count);
                     for (int i = 0; i < playerStatus.WindMax - count; i++)
                     {
                         var w = GameObject.Instantiate(windPrefab);
