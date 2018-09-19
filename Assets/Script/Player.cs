@@ -163,7 +163,7 @@ namespace GameJam.Sho
                 .Where(_ => Input.GetKeyDown(windAttack))
                 .Subscribe(_ =>
                 {
-                    var wind = CreateNewItem<Wind>(windPrefab);
+                    CreateNewItem<Wind>(windPrefab);
                     AttackByWind.Play();
                 }).AddTo(this);
 

@@ -10,10 +10,14 @@ namespace GameJam
     {
         private Animator Animator { get; set; } = null;
 
+        [SerializeField]
+        private float speed = 1.0f;
+
         // Use this for initialization
         void Start()
         {
             Animator = this.GetComponent<Animator>();
+            Animator.speed = speed;
         }
 
         public void RunStart()
