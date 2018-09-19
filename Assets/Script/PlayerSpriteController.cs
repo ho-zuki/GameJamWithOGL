@@ -28,5 +28,25 @@ namespace GameJam
         {
             Animator.SetBool("Running", false);
         }
+        public void JumpStart()
+        {
+            Animator.SetBool("Jumping", true);
+        }
+        public void JumpStop()
+        {
+            Animator.SetBool("Jumping", false);
+        }
+        public void ForceJumpStart()
+        {
+            if (!IsJumping())
+            {
+                Animator.SetTrigger("PushUp");
+                JumpStart();
+            }
+        }
+        public bool IsJumping()
+        {
+            return Animator.GetBool("Jumping");
+        }
     }
 }

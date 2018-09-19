@@ -28,6 +28,14 @@ namespace GameJam.Sho
                     var v = new Vector2(0.0f, 1.0f);
                     n.Rigidbody.AddForce(v.normalized * power);
                 }).AddTo(this);
+
+            var se = this.GetComponent<AudioSource>();
+            se.Play();
+            this.OnDestroyAsObservable()
+                .Subscribe(_ =>
+                {
+                    se.Stop();
+                }).AddTo(this);
         }
     }
 }

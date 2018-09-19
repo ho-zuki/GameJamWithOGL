@@ -40,7 +40,7 @@ namespace GameJam.Sho
 
         private float gravityScale { get; set; } = 1.0f;
         [SerializeField]
-        private bool isOnGround = true;
+        private bool isOnGround = false;
         public bool IsOnGround
         {
             get { return isOnGround; }
@@ -89,6 +89,8 @@ namespace GameJam.Sho
             Audios = this.GetComponents<AudioSource>();
             MotionController = this.GetComponentInChildren<PlayerSpriteController>();
 
+            WalkSound.pitch *= 2.0f;
+
             // 移動の処理/ For Move
             this.FixedUpdateAsObservable()
                 .Subscribe(_ =>
@@ -132,13 +134,19 @@ namespace GameJam.Sho
                 .Subscribe(_ =>
                 {
                     Rigidbody.AddForce(Vector2.up * jumpPower);
+                    MotionController.JumpStart();
                 }).AddTo(this);
 
             // 接地判定 / Check is on Ground
             this.UpdateAsObservable()
                 .Subscribe(_ =>
                 {
+                    var past = IsOnGround;
                     IsOnGround = Rigidbody.velocity.y <= 0.1f && Rigidbody.velocity.y >= -0.1f;
+                    if (!MotionController.IsJumping() && !IsOnGround)
+                    {
+                        MotionController.ForceJumpStart();
+                    }
                 }).AddTo(this);
 
             // throwing Shuriken
@@ -172,6 +180,10 @@ namespace GameJam.Sho
                 .Subscribe(hit =>
                 {
                     IsHittedWithGround = hit.gameObject.tag == "Ground";
+                    if (IsHittedWithGround)
+                    {
+                        MotionController.JumpStop();
+                    }
                 }).AddTo(this);
         }
 
