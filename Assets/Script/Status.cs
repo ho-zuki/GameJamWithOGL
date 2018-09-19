@@ -31,10 +31,13 @@ namespace GameJam.Sho
         public IObservable<Unit> DeadEvent => _DeadEvent;
 
         // Use this for initialization
-        void Start()
+        void Awake()
+        {
+            MAXHP = HP;
+        }
+        private void Start()
         {
             HP = hp;
-            MAXHP = HP;
         }
     }
 }

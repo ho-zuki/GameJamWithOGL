@@ -39,20 +39,25 @@ namespace GameJam.Sho
 
             var player = GameObject.Find("Player");
 
+            float waitTimer = 0.0f;
             this.UpdateAsObservable()
                 .Where(_ => state == State.Wait)
-                .Delay(TimeSpan.FromSeconds(status.HP / status.MAXHP * timerRateForExitingWait))
                 .Subscribe(_ =>
                 {
-                    // 待機の時何もせず一定時間後次のStateに戻す
-                    var n = UnityEngine.Random.Range(0, 10);
-                    if (n < 5)
+                    waitTimer += Time.deltaTime;
+                    if (waitTimer >= (status.HP / status.MAXHP + 1.0f) * timerRateForExitingWait)
                     {
-                        state = State.CallEnemy;
-                        return;
+                        // 待機の時何もせず一定時間後次のStateに戻す
+                        var n = UnityEngine.Random.Range(0, 10);
+                        if (n < 5)
+                        {
+                            state = State.CallEnemy;
+                            return;
+                        }
+                        state = State.Lazer;
+                        preLazer.SetActive(true);
+                        waitTimer = 0.0f;
                     }
-                    state = State.Lazer;
-                    preLazer.SetActive(true);
                 }).AddTo(this);
 
             this.UpdateAsObservable()
@@ -72,14 +77,13 @@ namespace GameJam.Sho
                     var p = preLazer.transform.position;
                     p.y = Mathf.Lerp(p.y, player.transform.position.y, Time.deltaTime);
                     preLazer.transform.position = p;
-                    if (lazerTimer >= status.HP / status.MAXHP * 2.0f)
+                    if (lazerTimer >= (status.HP / status.MAXHP + 1.0f) * timerRateForLazer)
                     {
                         lazerTimer = 0.0f;
                         state = State.Wait;
 
                         var lazer = GameObject.Instantiate(lazerPrefab);
                         lazer.transform.position = preLazer.transform.position;
-                        state = State.Wait;
                         preLazer.SetActive(false);
                     }
                 }).AddTo(this);
