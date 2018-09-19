@@ -8,6 +8,11 @@ namespace GameJam.Sho
 {
     public class Player : MonoBehaviour
     {
+        public enum Direction
+        {
+            Right = 1,
+            Left = -1,
+        }
         [SerializeField, Header("Move Speed")]
         private float speed = 10.0f;
 
@@ -53,6 +58,17 @@ namespace GameJam.Sho
             }
         }
 
+        [SerializeField]
+        private GameObject shurikenPrefab = null;
+        [SerializeField]
+        private float shurikenThrowPower = 100.0f;
+
+        [SerializeField]
+        private GameObject windPrefab = null;
+
+        [SerializeField]
+        private Direction currentDirection = Direction.Right;
+        public Direction CurrentDirection { get { return currentDirection; } set { currentDirection = value; } }
         // Use this for initialization
         void Start()
         {
@@ -61,35 +77,80 @@ namespace GameJam.Sho
             IsOnGround = false;
 
             // 移動の処理/ For Move
-            this.FixedUpdateAsObservable().Subscribe(_ =>
-            {
-                if (Input.GetKey(rightMove))
+            this.FixedUpdateAsObservable()
+                .Subscribe(_ =>
                 {
-                    Rigidbody.AddForce(Vector2.right * speed * Time.fixedDeltaTime);
-                }
-                if (Input.GetKey(leftMove))
-                {
-                    Rigidbody.AddForce(Vector2.left * speed * Time.fixedDeltaTime);
-                }
-                if (Rigidbody.velocity.magnitude >= speedMax)
-                {
-                    Rigidbody.velocity = Rigidbody.velocity.normalized * speedMax;
-                }
+                    if (Input.GetKey(rightMove))
+                    {
+                        Rigidbody.AddForce(Vector2.right * speed * Time.fixedDeltaTime);
+                        CurrentDirection = Direction.Right;
+                    }
+                    if (Input.GetKey(leftMove))
+                    {
+                        Rigidbody.AddForce(Vector2.left * speed * Time.fixedDeltaTime);
+                        CurrentDirection = Direction.Left;
+                    }
+                    if (Rigidbody.velocity.magnitude >= speedMax)
+                    {
+                        Rigidbody.velocity = Rigidbody.velocity.normalized * speedMax;
+                    }
 
-                Rigidbody.velocity *= 0.8f;
-            }).AddTo(this);
+                    Rigidbody.velocity *= 0.8f;
+                }).AddTo(this);
 
             // Jump
-            this.FixedUpdateAsObservable().Subscribe(_ =>
-            {
-                if (IsOnGround && Input.GetKeyDown(jump))
+            this.FixedUpdateAsObservable()
+                .Where(n => IsOnGround && Input.GetKeyDown(jump))
+                .Subscribe(_ =>
                 {
                     Rigidbody.AddForce(Vector2.up * jumpPower);
-                }
-            }).AddTo(this);
+                }).AddTo(this);
 
-            this.OnCollisionEnter2DAsObservable().Where(n => n.gameObject.tag == "Ground").Subscribe(_ => IsOnGround = true);
-            this.OnCollisionExit2DAsObservable().Where(n => n.gameObject.tag == "Ground").Subscribe(_ => IsOnGround = false);
+            // 接地判定 / Check is on Ground
+            this.UpdateAsObservable()
+                .Subscribe(_ =>
+                {
+                    if (Rigidbody.velocity.y <= 0.1f && Rigidbody.velocity.y >= -0.1f)
+                    {
+                        IsOnGround = true;
+                    }
+                    else
+                    {
+                        IsOnGround = false;
+                    }
+                }).AddTo(this);
+
+            // throwing Shuriken
+            this.UpdateAsObservable()
+                .Where(_ => Input.GetKeyDown(attack))
+                .Subscribe(_ =>
+                {
+                    var shuriken = CreateNewItem<Shuriken>(shurikenPrefab);
+
+                    var d = Vector2.right;
+                    d.x = (int)CurrentDirection;
+                    shuriken.Rigidbody.AddForce(d * shurikenThrowPower);
+
+                    // temp
+                    GameObject.Destroy(shuriken, 5.0f);
+                }).AddTo(this);
+
+            this.UpdateAsObservable()
+                .Where(_ => Input.GetKeyDown(windAttack))
+                .Subscribe(_ =>
+                {
+                    var wind = CreateNewItem<Wind>(windPrefab);
+                }).AddTo(this);
+        }
+
+        T CreateNewItem<T>(GameObject prefab) where T : ISpawnedByPlayer
+        {
+            var newObj = GameObject.Instantiate(prefab).GetComponent<T>();
+            newObj.transform.position = this.transform.position;
+            var offsetWithDir = newObj.Offset;
+            offsetWithDir.x *= (int)CurrentDirection;
+            newObj.transform.Translate(offsetWithDir);
+            return newObj;
         }
     }
 }
