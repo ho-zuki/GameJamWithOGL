@@ -11,7 +11,7 @@ namespace GameJam.Sho
         [SerializeField]
         private float lifeTimer = 5.0f;
         [SerializeField]
-        private int attackPower = 1;
+        private int power = 1;
         [SerializeField]
         private Vector2 offset = new Vector2(2, 0);
         public Vector2 Offset => offset;
@@ -19,6 +19,15 @@ namespace GameJam.Sho
         void Start()
         {
             GameObject.Destroy(this.gameObject, lifeTimer);
+
+            this.OnTriggerStay2DAsObservable()
+                .Select(n => n.GetComponent<StandObjectOnWind>())
+                .Where(n => n != null)
+                .Subscribe(n =>
+                {
+                    var v = new Vector2(0.0f, 1.0f);
+                    n.Rigidbody.AddForce(v.normalized * power);
+                }).AddTo(this);
         }
     }
 }

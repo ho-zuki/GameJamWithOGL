@@ -69,12 +69,25 @@ namespace GameJam.Sho
         [SerializeField]
         private Direction currentDirection = Direction.Right;
         public Direction CurrentDirection { get { return currentDirection; } set { currentDirection = value; } }
+
+        private AudioSource[] Audios;
+        private AudioSource WalkSound => Audios[0];
+        private AudioSource AttackByShuriken => Audios[1];
+        private AudioSource AttackByWind => Audios[2];
+        //private AudioSource Jump => Audios[3];
+
+        private bool IsHittedWithGround { get; set; } = false;
+
+        private PlayerSpriteController MotionController { get; set; } = null;
+
         // Use this for initialization
         void Start()
         {
             Rigidbody = this.GetComponent<Rigidbody2D>();
             gravityScale = Rigidbody.gravityScale;
             IsOnGround = false;
+            Audios = this.GetComponents<AudioSource>();
+            MotionController = this.GetComponentInChildren<PlayerSpriteController>();
 
             // 移動の処理/ For Move
             this.FixedUpdateAsObservable()
@@ -84,11 +97,26 @@ namespace GameJam.Sho
                     {
                         Rigidbody.AddForce(Vector2.right * speed * Time.fixedDeltaTime);
                         CurrentDirection = Direction.Right;
+                        if (!WalkSound.isPlaying && (IsOnGround && IsHittedWithGround)) WalkSound.PlayOneShot(WalkSound.clip);
+                        MotionController.RunStart();
+
+                        var scale = this.transform.localScale;
+                        if (scale.x < 0) scale.x *= -1;
+                        this.transform.localScale = scale;
                     }
-                    if (Input.GetKey(leftMove))
+                    else if (Input.GetKey(leftMove))
                     {
                         Rigidbody.AddForce(Vector2.left * speed * Time.fixedDeltaTime);
                         CurrentDirection = Direction.Left;
+                        if (!WalkSound.isPlaying && (IsOnGround && IsHittedWithGround)) WalkSound.PlayOneShot(WalkSound.clip);
+                        MotionController.RunStart();
+                        var scale = this.transform.localScale;
+                        if (scale.x > 0) scale.x *= -1;
+                        this.transform.localScale = scale;
+                    }
+                    else
+                    {
+                        MotionController.RunStop();
                     }
                     if (Rigidbody.velocity.magnitude >= speedMax)
                     {
@@ -110,14 +138,7 @@ namespace GameJam.Sho
             this.UpdateAsObservable()
                 .Subscribe(_ =>
                 {
-                    if (Rigidbody.velocity.y <= 0.1f && Rigidbody.velocity.y >= -0.1f)
-                    {
-                        IsOnGround = true;
-                    }
-                    else
-                    {
-                        IsOnGround = false;
-                    }
+                    IsOnGround = Rigidbody.velocity.y <= 0.1f && Rigidbody.velocity.y >= -0.1f;
                 }).AddTo(this);
 
             // throwing Shuriken
@@ -133,13 +154,24 @@ namespace GameJam.Sho
 
                     // temp
                     GameObject.Destroy(shuriken, 5.0f);
+
+                    AttackByShuriken.Play();
                 }).AddTo(this);
 
+            // Creating Wind
             this.UpdateAsObservable()
                 .Where(_ => Input.GetKeyDown(windAttack))
                 .Subscribe(_ =>
                 {
                     var wind = CreateNewItem<Wind>(windPrefab);
+                    AttackByWind.Play();
+                }).AddTo(this);
+
+            // temp 当たったオブジェクトが地面かどうかを監視する Check Hitting Object is Ground
+            this.OnCollisionStay2DAsObservable()
+                .Subscribe(hit =>
+                {
+                    IsHittedWithGround = hit.gameObject.tag == "Ground";
                 }).AddTo(this);
         }
 

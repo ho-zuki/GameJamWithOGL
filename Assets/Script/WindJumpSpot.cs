@@ -18,9 +18,9 @@ namespace GameJam.Sho
             Wind = this.GetComponentInParent<Wind>();
             this.OnCollisionEnter2DAsObservable()
                 .Select(obj => obj.gameObject.GetComponent<StandObjectOnWind>())
-                .Where(n => n != null)
                 .Subscribe(obj =>
                 {
+                    pastTouchObject?.OnWindDestroyed();
                     pastTouchObject = obj;
                 }).AddTo(this);
 
