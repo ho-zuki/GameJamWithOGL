@@ -18,8 +18,8 @@ namespace GameJam.Sho
             {
                 hp = value;
                 hp = Mathf.Max(hp, 0);
+                _HpChangedEvent.OnNext(hp);
                 if (hp == 0) _DeadEvent.OnNext(Unit.Default);
-                else _HpChangedEvent.OnNext(hp);
             }
         }
         public int MAXHP { get; set; } = 0;

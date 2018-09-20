@@ -42,10 +42,15 @@ namespace GameJam.Sho
 
             var t2 = 0.0f;
             var t1 = 0.0f;
+            var s = this.GetComponent<AudioSource>();
             this.UpdateAsObservable()
                 .Subscribe(_ =>
                 {
                     t2 += speedRate * Time.deltaTime;
+                    if (!s.isPlaying && t1 <= 1.0f && t2 <= 1.0f)
+                    {
+                        s.Play();
+                    }
                     if (IsClose)
                     {
                         t2 += speedRate * Time.deltaTime;

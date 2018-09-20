@@ -20,6 +20,8 @@ namespace GameJam.Sho
         [SerializeField]
         private float cameraShakeStlength = 1.0f;
 
+        private Coroutine CameraShake { get; set; } = null;
+
         // Use this for initialization
         void Start()
         {
@@ -31,8 +33,11 @@ namespace GameJam.Sho
                 .Subscribe(_ =>
                 {
                     player.Rigidbody.AddForce((int)player.CurrentDirection * Vector2.left * knockBackPower);
-                    StartCoroutine(FlushPlayerSprite(player));
-                    camera.transform.transform.DOShakePosition(cameraShakeTime, cameraShakeStlength);
+                    if (CameraShake != null)
+                    {
+                        CameraShake = StartCoroutine(FlushPlayerSprite(player));
+                    }
+                    if (_ != 0) camera.transform.transform.DOShakePosition(cameraShakeTime, cameraShakeStlength);
                 }).AddTo(this);
         }
 

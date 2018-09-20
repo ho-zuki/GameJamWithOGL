@@ -4,6 +4,7 @@ using UnityEngine;
 using UniRx;
 using UniRx.Triggers;
 using Hozuki;
+using UnityEngine.SceneManagement;
 
 namespace GameJam.Sho
 {
@@ -212,7 +213,7 @@ namespace GameJam.Sho
                 .Subscribe(_ =>
                 {
                     status.HP--;
-                });
+                }).AddTo(this);
             // test
             this.UpdateAsObservable()
                 .Where(n => Input.GetKeyDown(KeyCode.H))
@@ -221,7 +222,7 @@ namespace GameJam.Sho
                     var h = GameObject.Instantiate(husuma).GetComponent<Husuma>();
                     h.transform.SetParent(GameObject.Find("UI").transform, false);
                     h.IsClose = true;
-                });
+                }).AddTo(this);
             this.UpdateAsObservable()
                 .Where(n => Input.GetKeyDown(KeyCode.G))
                 .Subscribe(_ =>
@@ -229,7 +230,27 @@ namespace GameJam.Sho
                     var h = GameObject.Instantiate(husuma).GetComponent<Husuma>();
                     h.transform.SetParent(GameObject.Find("UI").transform, false);
                     h.IsClose = false;
-                });
+                }).AddTo(this);
+
+            status.DeadEvent
+                .Subscribe(_ =>
+                {
+                    Time.timeScale = 0.5f;
+
+                    this.DelayMethodInRealTime(1.0f, () =>
+                    {
+                        Time.timeScale = 1.0f;
+                        var h = GameObject.Instantiate(husuma).GetComponent<Husuma>();
+                        h.transform.SetParent(GameObject.Find("UI").transform, false);
+                        h.IsClose = true;
+                        h.HusumaCompleteEvent
+                        .Subscribe(__ =>
+                        {
+                            Result.State = ClearState.Lose;
+                            SceneManager.LoadScene("Result");
+                        });
+                    });
+                }).AddTo(this);
         }
 
         T CreateNewItem<T>(GameObject prefab) where T : ISpawnedByPlayer

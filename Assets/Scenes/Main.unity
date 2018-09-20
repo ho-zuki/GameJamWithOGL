@@ -457,7 +457,7 @@ MonoBehaviour:
   flushSpan: 0.05
   flushTime: 0.5
   cameraShakeTime: 1
-  cameraShakeStlength: 1
+  cameraShakeStlength: 0.1
 --- !u!1001 &773231235
 Prefab:
   m_ObjectHideFlags: 0
