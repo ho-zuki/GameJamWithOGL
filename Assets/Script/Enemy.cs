@@ -27,6 +27,7 @@ namespace GameJam.Sho
         private bool attack, spawn;
         private float timer;
         private float speed;
+        private float animation_speed;
 
         // 大きさ / scale
         private const float e_scale = 0.5f;
@@ -54,8 +55,8 @@ namespace GameJam.Sho
             spawn = true;
             scale = new Vector3(e_scale, e_scale, e_scale);
             animator = GetComponent<Animator>();
+            animation_speed = 1.0f;
         }
-
 
         void Update()
         {
@@ -88,19 +89,21 @@ namespace GameJam.Sho
                 case Attack_Type.E_LEFT:
                     animator.SetBool("run_flag", true);
                     animator.SetBool("attack_flag", false);
-                   
+
                     scale.x = -e_scale;
                     timer += (Time.deltaTime) * 1.0f;
                     speed = -movespeed;
+                    animation_speed = 1.0f;
                     break;
 
                 case Attack_Type.E_RIGHT:
                     animator.SetBool("run_flag", true);
                     animator.SetBool("attack_flag", false);
-                    
+
                     scale.x = e_scale;
                     timer += (Time.deltaTime) * 1.0f;
                     speed = movespeed;
+                    animation_speed = 1.0f;
                     break;
 
                 // 攻撃（突進） / For attack（tackle attack）
@@ -109,7 +112,7 @@ namespace GameJam.Sho
                     animator.SetBool("run_flag", false);
                     scale.x = -e_scale;
                     timer += (Time.deltaTime) * 1.0f;
-                    speed = -tackle_speed;
+                    speed = 0;
                     break;
 
                 case Attack_Type.E_ATTACK_RIGHT:
@@ -117,13 +120,13 @@ namespace GameJam.Sho
                     animator.SetBool("run_flag", false);
                     scale.x = e_scale;
                     timer += (Time.deltaTime) * 1.0f;
-                    speed = tackle_speed;
+                    speed = 0;
                     break;
             }
 
 
-            // 突進攻撃終了 / Tackle Attack End
-            if (attack && timer >= 2.0f)
+            // 攻撃終了 / Attack End
+            if (attack && timer >= 1.7f)
             {
                 // animator.SetBool("attack_flag", false);
                 // animator.SetBool("run_flag", true);
@@ -161,6 +164,8 @@ namespace GameJam.Sho
             ///    transform.Translate(Random.Range(-5, 5), Random.Range(0, 10), 0.0f);
             ///}
 
+            animator.speed = animation_speed;
+
             transform.localScale = scale;
             transform.Translate(pos.x, pos.y, 0.0f);
         }
@@ -168,6 +173,7 @@ namespace GameJam.Sho
         //　一定距離近づいたら攻撃
         private void OnTriggerEnter2D(Collider2D collision)
         {
+
             if (!attack && !spawn)
             {
                 if (collision.gameObject.tag == "Player")
@@ -181,10 +187,20 @@ namespace GameJam.Sho
                         state = Attack_Type.E_ATTACK_RIGHT;
                     }
 
+
+
                     attack = true;
-                    //timer = 0;
+                    timer = 0;
                 }
                 //GameObject.Find("Player");
+            }
+        }
+
+        private void OnTriggerStay2D(Collider2D collision)
+        {
+            if ((this.transform.position - collision.gameObject.transform.position).magnitude < 1.5f)
+            {
+                if (collision.gameObject.tag == "Player") GameObject.Destroy(this.gameObject);
             }
         }
     }
