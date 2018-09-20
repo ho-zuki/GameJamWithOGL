@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Shuriken
   - JumpSpot
+  - ObjectDead
   layers:
   - Default
   - TransparentFX

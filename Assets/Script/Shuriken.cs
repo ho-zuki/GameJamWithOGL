@@ -34,6 +34,12 @@ namespace GameJam.Sho
                     GameObject.Destroy(this.gameObject);
                 }).AddTo(this);
 
+            this.OnCollisionEnter2DAsObservable()
+                .Where(n => n.gameObject.tag == "ObjectDead")
+                .Subscribe(_ =>
+                {
+                    GameObject.Destroy(this.gameObject);
+                }).AddTo(this);
         }
     }
 }
