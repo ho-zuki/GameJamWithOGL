@@ -16,10 +16,11 @@ namespace GameJam.Sho
             get { return hp; }
             set
             {
+                if (IsIncredible) return;
                 hp = value;
                 hp = Mathf.Max(hp, 0);
+                _HpChangedEvent.OnNext(hp);
                 if (hp == 0) _DeadEvent.OnNext(Unit.Default);
-                else _HpChangedEvent.OnNext(hp);
             }
         }
         public int MAXHP { get; set; } = 0;
@@ -29,6 +30,8 @@ namespace GameJam.Sho
 
         private ISubject<Unit> _DeadEvent { get; set; } = new Subject<Unit>();
         public IObservable<Unit> DeadEvent => _DeadEvent;
+
+        public bool IsIncredible { get; set; } = false;
 
         // Use this for initialization
         void Awake()
