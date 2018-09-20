@@ -15,8 +15,7 @@ public class Shoot : MonoBehaviour
     public float atkRange;
     public int bulletAmount;
     public float cooldown;
-    private float nextShot = 0.0f;
-
+   
     public float shootRate = 0.3f;
 
     public LayerMask targetLayer;
@@ -24,6 +23,10 @@ public class Shoot : MonoBehaviour
     public float bulletSpeed;
 
     bool playerInRange;
+    private float nextShot = 0.0f;
+    bool takeShot;
+    int bulletCount;
+    Vector2 targetPos;
 
 
     // Use this for initialization
@@ -36,19 +39,27 @@ public class Shoot : MonoBehaviour
     void Update()
     {
         playerInRange = Physics2D.OverlapCircle(transform.position, atkRange, targetLayer);
-        if (playerInRange && Time.time>nextShot)
+        if (playerInRange && Time.time > nextShot)
         {
-            for (int i = 0; i < bulletAmount; i++)
+            if (Time.time > nextShot)
             {
-                if (Time.time > nextShot)
-                {
-                    Instantiate(bullet, shooter.transform.position, Quaternion.identity);
-                    nextShot += shootRate;
-                }
+                takeShot = true;
+                targetPos = target.transform.position;
             }
-            nextShot += cooldown;
+            if (takeShot && bulletCount < bulletAmount)
+            {
+                Instantiate(bullet, shooter.transform.position, Quaternion.identity);
+                nextShot += shootRate;
+                bulletCount++;
+                takeShot = false;
+            }
+            if (bulletCount >= bulletAmount)
+            {
+                nextShot += cooldown;
+            }
+            
         }
-
+        
     }
     void OnDrawGizmosSelected()
     {
