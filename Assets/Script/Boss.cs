@@ -39,6 +39,10 @@ namespace GameJam.Sho
 
             var player = GameObject.Find("Player");
 
+            var sounds = this.GetComponents<AudioSource>();
+            var animator = this.GetComponentInChildren<Animator>();
+            var light = GameObject.Find("BossLight").GetComponent<Light>();
+
             float waitTimer = 0.0f;
             this.UpdateAsObservable()
                 .Where(_ => state == State.Wait)
@@ -67,7 +71,6 @@ namespace GameJam.Sho
                     // temp
                     state = State.Wait;
                 }).AddTo(this);
-
             var lazerTimer = 0.0f;
             this.UpdateAsObservable()
                 .Where(_ => state == State.Lazer)
@@ -77,14 +80,21 @@ namespace GameJam.Sho
                     var p = preLazer.transform.position;
                     p.y = Mathf.Lerp(p.y, player.transform.position.y, Time.deltaTime);
                     preLazer.transform.position = p;
-                    if (lazerTimer >= (status.HP / status.MAXHP + 1.0f) * timerRateForLazer)
+                    light.intensity += Time.deltaTime;
+                    light.intensity = Mathf.Max(6, light.intensity);
+                    if (lazerTimer >= (status.HP / status.MAXHP + 0.5f) * timerRateForLazer)
                     {
                         lazerTimer = 0.0f;
                         state = State.Wait;
-
-                        var lazer = GameObject.Instantiate(lazerPrefab);
-                        lazer.transform.position = preLazer.transform.position;
                         preLazer.SetActive(false);
+                        sounds[0].Play();
+                        animator.SetTrigger("Lazer");
+                        StartCoroutine(LightDisapp(light));
+                        this.DelayMethod(1.5f, () =>
+                        {
+                            var lazer = GameObject.Instantiate(lazerPrefab);
+                            lazer.transform.position = preLazer.transform.position;
+                        });
                     }
                 }).AddTo(this);
 
@@ -100,6 +110,16 @@ namespace GameJam.Sho
                 {
                     GameObject.Destroy(this.gameObject);
                 }).AddTo(this);
+        }
+
+        private IEnumerator LightDisapp(Light light)
+        {
+            while (true)
+            {
+                light.intensity *= 0.8f;
+                yield return new WaitForSecondsRealtime(0.016f);
+                if (light.intensity <= 0.0f) break;
+            }
         }
     }
 }

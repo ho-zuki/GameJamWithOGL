@@ -22,6 +22,8 @@ namespace GameJam.Sho
             TrailRenderer = this.GetComponentInChildren<TrailRenderer>();
             Collider2D = this.GetComponentInChildren<BoxCollider2D>();
 
+            this.GetComponent<AudioSource>().Play();
+
             this.UpdateAsObservable()
                 .Subscribe(_ =>
                 {

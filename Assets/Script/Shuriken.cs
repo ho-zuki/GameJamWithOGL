@@ -31,6 +31,7 @@ namespace GameJam.Sho
 
                     var e = GameObject.Instantiate(effect);
                     e.transform.position = this.transform.position;
+                    GameObject.Destroy(e.gameObject, 1.0f);
                     GameObject.Destroy(this.gameObject);
                 }).AddTo(this);
 

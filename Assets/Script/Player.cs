@@ -262,5 +262,22 @@ namespace GameJam.Sho
             newObj.transform.Translate(offsetWithDir);
             return newObj;
         }
+
+        bool hitFlg = false;
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.gameObject.tag == "Player")
+            {
+                hitFlg = true;
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.gameObject.tag == "Player")
+            {
+                hitFlg = false;
+            }
+        }
     }
 }
