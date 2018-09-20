@@ -5,6 +5,8 @@ using UniRx;
 using UniRx.Triggers;
 using Hozuki;
 using System;
+using DG;
+using UnityEngine.SceneManagement;
 
 namespace GameJam.Sho
 {
@@ -15,11 +17,12 @@ namespace GameJam.Sho
             CallEnemy,
             Lazer,
             Wait,
-            Damaged
+            Damaged,
+            Appear,
         }
 
         [SerializeField, Header("ReadOnly For Debug")]
-        private State state = State.Wait;
+        private State state = State.Appear;
 
         [SerializeField]
         private GameObject lazerPrefab = null;
@@ -29,6 +32,8 @@ namespace GameJam.Sho
         private float timerRateForExitingWait = 10.0f;
         [SerializeField]
         private float timerRateForLazer = 10.0f;
+        [SerializeField]
+        private Husuma husumaPrefabs = null;
 
         // Use this for initialization
         void Start()
@@ -71,6 +76,7 @@ namespace GameJam.Sho
                     // temp
                     state = State.Wait;
                 }).AddTo(this);
+
             var lazerTimer = 0.0f;
             this.UpdateAsObservable()
                 .Where(_ => state == State.Lazer)
@@ -89,11 +95,11 @@ namespace GameJam.Sho
                         preLazer.SetActive(false);
                         sounds[0].Play();
                         animator.SetTrigger("Lazer");
-                        StartCoroutine(LightDisapp(light));
                         this.DelayMethod(1.5f, () =>
                         {
                             var lazer = GameObject.Instantiate(lazerPrefab);
                             lazer.transform.position = preLazer.transform.position;
+                            StartCoroutine(LightDisapp(light));
                         });
                     }
                 }).AddTo(this);
@@ -108,8 +114,31 @@ namespace GameJam.Sho
             status.DeadEvent
                 .Subscribe(_ =>
                 {
-                    GameObject.Destroy(this.gameObject);
+                    this.DelayMethod(3.0f, () =>
+                    {
+                        var h = GameObject.Instantiate(husumaPrefabs).GetComponent<Husuma>();
+                        h.transform.SetParent(GameObject.Find("UI").transform, false);
+                        h.IsClose = true;
+                        h.HusumaCompleteEvent
+                        .Subscribe(__ =>
+                        {
+                            Result.State = ClearState.Win;
+                            SceneManager.LoadScene("Result");
+                        }).AddTo(this);
+                    });
+                    GameObject.Destroy(this.GetComponent<Collider2D>());
                 }).AddTo(this);
+
+            this.UpdateAsObservable()
+               .Where(_ => state == State.Appear)
+               .Subscribe(_ =>
+               {
+                   this.DelayMethod(1.0f, () =>
+                   {
+                       sounds[1].Play();
+                       state = State.Wait;
+                   });
+               }).AddTo(this);
         }
 
         private IEnumerator LightDisapp(Light light)

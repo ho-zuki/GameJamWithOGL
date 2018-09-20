@@ -45,6 +45,8 @@ namespace GameJam.Sho
                 {
                     obj.HP--;
                 }).AddTo(this);
+
+            GameObject.Destroy(this.gameObject, 10.0f);
         }
     }
 }
