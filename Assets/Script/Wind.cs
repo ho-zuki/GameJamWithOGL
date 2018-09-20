@@ -37,6 +37,17 @@ namespace GameJam.Sho
                 {
                     se.Stop();
                 }).AddTo(this);
+
+            var t = lifeTimer * 0.3f;
+            this.UpdateAsObservable()
+                .Subscribe(_ =>
+                {
+                    t -= Time.deltaTime;
+                    if(t<=0.0f)
+                    {
+                        this.transform.localScale *= 0.9999f;
+                    }
+                }).AddTo(this);
             GameObject.Destroy(this.gameObject, lifeTimer);
         }
 
