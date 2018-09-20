@@ -158,9 +158,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a28e165cebd7d340b24b2130c0bbeb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  windPrefab: {fileID: 1794871413413876, guid: f0ee4cfa8201f424b974438313afb487, type: 2}
+  windTPrefab: {fileID: 1715266664568482, guid: 578d863dc4dfaeb4aa98f40f414d5180,
+    type: 2}
+  windFPrefab: {fileID: 1996038279086142, guid: a467e74119b92c24c961bcde1b6d9317,
+    type: 2}
   interval: 30
-  Winds: []
 --- !u!1001 &351543821
 Prefab:
   m_ObjectHideFlags: 0
@@ -457,7 +459,7 @@ MonoBehaviour:
   flushSpan: 0.05
   flushTime: 0.5
   cameraShakeTime: 1
-  cameraShakeStlength: 0.1
+  cameraShakeStlength: 0.8
 --- !u!1001 &773231235
 Prefab:
   m_ObjectHideFlags: 0

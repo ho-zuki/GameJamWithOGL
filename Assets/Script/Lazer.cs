@@ -35,6 +35,14 @@ namespace GameJam.Sho
                     Collider2D.offset = new Vector2((max - min) * 0.5f, 0.0f);
                     Collider2D.size = new Vector2(max - min, 1.5f);
                 }).AddTo(this);
+
+            this.OnTriggerStay2DAsObservable()
+                .Where(obj => obj.gameObject.tag == "Player")
+                .Select(obj => obj.gameObject.GetComponent<Status>())
+                .Subscribe(obj =>
+                {
+                    obj.HP--;
+                }).AddTo(this);
         }
     }
 }

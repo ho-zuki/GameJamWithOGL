@@ -32,16 +32,17 @@ namespace GameJam.Sho
             playerStatus.HPChangedEvent
                 .Subscribe(_ =>
                 {
+                    playerStatus.IsIncredible = true;
                     player.Rigidbody.AddForce((int)player.CurrentDirection * Vector2.left * knockBackPower);
-                    if (CameraShake != null)
+                    if (CameraShake == null)
                     {
-                        CameraShake = StartCoroutine(FlushPlayerSprite(player));
+                        CameraShake = StartCoroutine(FlushPlayerSprite(player, playerStatus));
                     }
                     if (_ != 0) camera.transform.transform.DOShakePosition(cameraShakeTime, cameraShakeStlength);
                 }).AddTo(this);
         }
 
-        private IEnumerator FlushPlayerSprite(Player player)
+        private IEnumerator FlushPlayerSprite(Player player, PlayerStatus playerStatus)
         {
             float t = 0.0f;
             while (true)
@@ -52,6 +53,8 @@ namespace GameJam.Sho
                 if (t >= flushTime) break;
             }
             player.Renderer.enabled = true;
+            CameraShake = null;
+            playerStatus.IsIncredible = false;
         }
     }
 }
