@@ -13,7 +13,10 @@ public class MoveType1 : MonoBehaviour {
     public LayerMask playerLayer;
     public float moveSpeed;
 
-    bool playerInRange;
+    bool playerInRange = false;
+    public float chaseTime;
+    private bool chaseStart = false;
+    private float chaseBegin;
     
     
 	// Use this for initialization
@@ -23,13 +26,24 @@ public class MoveType1 : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        playerInRange = Physics2D.OverlapCircle(transform.position, enemyVision, playerLayer);
+        if(chaseStart == false) playerInRange = Physics2D.OverlapCircle(transform.position, enemyVision, playerLayer);
         if (playerInRange)
         {
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+            chaseStart = true;
+            chaseBegin = Time.time;
+            playerInRange = false;
         }
-          	
-	}
+        if (chaseStart) {
+            if (Time.time < (chaseBegin + chaseTime) /*!hit player*/){
+                transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+            }
+            else
+            {
+                transform.position = Vector2.MoveTowards(transform.position, new Vector2(-20,10), moveSpeed * Time.deltaTime);
+            }
+        }
+
+    }
     void OnDrawGizmosSelected()
     {
         Gizmos.DrawSphere(transform.position,enemyVision);
