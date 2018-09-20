@@ -4,6 +4,7 @@ using UnityEngine;
 using UniRx;
 using UniRx.Triggers;
 using Hozuki;
+using UnityEngine.SceneManagement;
 
 namespace GameJam.Sho
 {
@@ -34,7 +35,7 @@ namespace GameJam.Sho
         [SerializeField]
         private /*readonly*/ KeyCode windAttack = KeyCode.Z;
 
-        private Rigidbody2D Rigidbody { get; set; } = null;
+        public Rigidbody2D Rigidbody { get; set; } = null;
 
         [SerializeField]
         private float gravityScaleWhenJumping = 10.0f;
@@ -84,6 +85,11 @@ namespace GameJam.Sho
         [SerializeField]
         private float attackDelay = 0.5f;
 
+        public SpriteRenderer Renderer { get; set; } = null;
+
+        [SerializeField]
+        private GameObject husuma;
+
         // Use this for initialization
         void Start()
         {
@@ -94,6 +100,7 @@ namespace GameJam.Sho
             MotionController = this.GetComponentInChildren<PlayerSpriteController>();
 
             WalkSound.pitch *= 2.0f;
+            Renderer = this.GetComponentInChildren<SpriteRenderer>();
 
             var status = this.GetComponent<PlayerStatus>();
 
@@ -139,7 +146,7 @@ namespace GameJam.Sho
                 .Where(n => IsOnGround && Input.GetKeyDown(jump))
                 .Subscribe(_ =>
                 {
-                    Rigidbody.velocity = Vector2.zero;
+                    Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, 0.0f);
                     Rigidbody.AddForce(Vector2.up * jumpPower);
                     MotionController.JumpStart();
                 }).AddTo(this);
@@ -198,6 +205,51 @@ namespace GameJam.Sho
                     {
                         MotionController.JumpStop();
                     }
+                }).AddTo(this);
+
+            // test
+            this.UpdateAsObservable()
+                .Where(n => Input.GetKeyDown(KeyCode.D))
+                .Subscribe(_ =>
+                {
+                    status.HP--;
+                }).AddTo(this);
+            // test
+            this.UpdateAsObservable()
+                .Where(n => Input.GetKeyDown(KeyCode.H))
+                .Subscribe(_ =>
+                {
+                    var h = GameObject.Instantiate(husuma).GetComponent<Husuma>();
+                    h.transform.SetParent(GameObject.Find("UI").transform, false);
+                    h.IsClose = true;
+                }).AddTo(this);
+            this.UpdateAsObservable()
+                .Where(n => Input.GetKeyDown(KeyCode.G))
+                .Subscribe(_ =>
+                {
+                    var h = GameObject.Instantiate(husuma).GetComponent<Husuma>();
+                    h.transform.SetParent(GameObject.Find("UI").transform, false);
+                    h.IsClose = false;
+                }).AddTo(this);
+
+            status.DeadEvent
+                .Subscribe(_ =>
+                {
+                    Time.timeScale = 0.5f;
+
+                    this.DelayMethodInRealTime(1.0f, () =>
+                    {
+                        Time.timeScale = 1.0f;
+                        var h = GameObject.Instantiate(husuma).GetComponent<Husuma>();
+                        h.transform.SetParent(GameObject.Find("UI").transform, false);
+                        h.IsClose = true;
+                        h.HusumaCompleteEvent
+                        .Subscribe(__ =>
+                        {
+                            Result.State = ClearState.Lose;
+                            SceneManager.LoadScene("Result");
+                        });
+                    });
                 }).AddTo(this);
         }
 

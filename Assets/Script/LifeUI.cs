@@ -18,8 +18,8 @@ namespace GameJam.Sho
         // Use this for initialization
         void Start()
         {
-            var hp = GameObject.Find("Player").GetComponent<PlayerStatus>().HP;
-            for (int i = 0; i < hp; i++)
+            var status = GameObject.Find("Player").GetComponent<PlayerStatus>();
+            for (int i = 0; i < status.HP; i++)
             {
                 var heart = GameObject.Instantiate(heartPrefab);
                 var p = this.transform.position;
@@ -28,6 +28,13 @@ namespace GameJam.Sho
                 heart.transform.SetParent(this.transform);
                 HeartList.Add(heart);
             }
+            status.HPChangedEvent
+                .Subscribe(currentHP =>
+                {
+                    int index = 0;
+                    for (index = 0; index < currentHP; index++) ;
+                    GameObject.Destroy(HeartList[index].gameObject);
+                }).AddTo(this);
         }
     }
 }
