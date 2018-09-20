@@ -1,7 +1,28 @@
 fileFormatVersion: 2
-guid: 362f1b6b8d423b345a27337267e5b9ab
+guid: f60b1dc474cb6d54d851a1817df70c4f
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Onitaiki_0
+    21300002: Onitaiki_1
+    21300004: Onitaiki_2
+    21300006: Onitaiki_3
+    21300008: Onitaiki_4
+    21300010: Onitaiki_5
+    21300012: Onitaiki_6
+    21300014: Onitaiki_7
+    21300016: Onitaiki_8
+    21300018: Onitaiki_9
+    21300020: Onitaiki_10
+    21300022: Onitaiki_11
+    21300024: Onitaiki_12
+    21300026: Onitaiki_13
+    21300028: Onitaiki_14
+    21300030: Onitaiki_15
+    21300032: Onitaiki_16
+    21300034: Onitaiki_17
+    21300036: Onitaiki_18
+    21300038: Onitaiki_19
+    21300040: Onitaiki_20
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -40,7 +61,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -69,13 +90,444 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Onitaiki_0
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 1483
+        width: 340
+        height: 526
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82ddfdbd951e02640b9f695025596065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Onitaiki_1
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 1485
+        width: 340
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e988a09c9598aec438b60dfef215ceea
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Onitaiki_2
+      rect:
+        serializedVersion: 2
+        x: 823
+        y: 1483
+        width: 338
+        height: 526
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad85ae0844665fe4eaa3d0ba2d088291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Onitaiki_3
+      rect:
+        serializedVersion: 2
+        x: 1215
+        y: 1485
+        width: 350
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48542d5fb9a393b48bdde848e253028a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Onitaiki_4
+      rect:
+        serializedVersion: 2
+        x: 1621
+        y: 1485
+        width: 372
+        height: 526
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca7d7f7518aafe14cb749b7a9a8400cd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Onitaiki_5
+      rect:
+        serializedVersion: 2
+        x: 2047
+        y: 1485
+        width: 409
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03306fbdec046934dad6d22ce8908658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Onitaiki_6
+      rect:
+        serializedVersion: 2
+        x: 2509
+        y: 1487
+        width: 428
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a45548d445399d4baf392cc38f4d24e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Onitaiki_7
+      rect:
+        serializedVersion: 2
+        x: 2991
+        y: 1485
+        width: 450
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a886babcb4a43c1409b32c260d265a10
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Onitaiki_8
+      rect:
+        serializedVersion: 2
+        x: 3493
+        y: 1487
+        width: 461
+        height: 522
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9352d2996f7e4cd409cd359c9e568ec4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Onitaiki_9
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 905
+        width: 470
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3bd03d80a84b5d4eac68ddfd48bb74b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Onitaiki_10
+      rect:
+        serializedVersion: 2
+        x: 565
+        y: 905
+        width: 470
+        height: 522
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 997718cb08528ce4488f7503ea28ef48
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Onitaiki_11
+      rect:
+        serializedVersion: 2
+        x: 1088
+        y: 904
+        width: 473
+        height: 528
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5164fa4af0b06b74ea45c39846d12498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Onitaiki_12
+      rect:
+        serializedVersion: 2
+        x: 1616
+        y: 905
+        width: 462
+        height: 522
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 422a14ed3944e5745a95edc1bb9a4f8c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Onitaiki_13
+      rect:
+        serializedVersion: 2
+        x: 2131
+        y: 903
+        width: 446
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9230b139eacb2904aa01b003145b5691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Onitaiki_14
+      rect:
+        serializedVersion: 2
+        x: 2632
+        y: 905
+        width: 429
+        height: 522
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 783a205a8c311e24fbcf33c800f038a7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Onitaiki_15
+      rect:
+        serializedVersion: 2
+        x: 3117
+        y: 903
+        width: 404
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 572fb13e07740cb41bb4e24e3de460ff
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Onitaiki_16
+      rect:
+        serializedVersion: 2
+        x: 3577
+        y: 905
+        width: 375
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98f1801dd4c51cb40b2867f226895782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Onitaiki_17
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 323
+        width: 350
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a4a01079ad68bb4ea0daf08d8ccac96
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Onitaiki_18
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 321
+        width: 339
+        height: 526
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 193918aed28a55c4eb067e098953bd4f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Onitaiki_19
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 323
+        width: 344
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc79c1c4ce6dd6a4ab6fdcf61e41fcdb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Onitaiki_20
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 321
+        width: 340
+        height: 526
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36ac6c9d1eeb6f44fb02b66eb1fbe459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: f6a58a8912d926648974051ba8db6bc8
+    spriteID: 237754d4350b3d444bf6a1221f0c26e8
     vertices: []
     indices: 
     edges: []

@@ -11,52 +11,49 @@ namespace GameJam.Sho
     {
         private enum Attack_Type
         {
-            E_LEFT, E_RIGHT, E_TAG_LEFT, E_TAG_RIGHT, E_ATTACK_LEFT, E_ATTACK_RIGHT,
+            E_WAIT, E_LEFT, E_RIGHT, E_ATTACK_LEFT, E_ATTACK_RIGHT,
         };
 
         [SerializeField, Header("Rush speed")]
         private float movespeed = 0.01f;
 
+        [SerializeField, Header("Enemy state")]
+        private Attack_Type state;
+
+        [SerializeField, Header("Tackle speed")]
+        private float tackle_speed = 0.1f;
+
         private Vector2 pos;
+        private bool attack, spawn;
+        private float timer;
+        private float speed;
 
-        [SerializeField, Header("Enemy State")]
-        private int state;
-        private bool attack;
+        // 大きさ / scale
+        private const float e_scale = 0.5f;
+        private Vector3 scale;
 
-        float timer;
-        float speed;
+        // アニメーションフラグ
+        ///private bool a_taikiflag, a_run_flag, a_attack_flag;
 
+        // 音声読み込み / Load from sound data.
+        private AudioSource[] audios;
+        private AudioSource tackle_sound => audios[0];
+        private AudioSource destroy_sound => audios[1];
 
-        //　一定距離近づいたら攻撃
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            if (!attack)
-            {
-                if (collision.gameObject.tag == "Player")
-                {
-                    if ((this.transform.position.x > collision.gameObject.transform.position.x))
-                    {
-                        state = (int)(Attack_Type.E_TAG_LEFT);
-                    }
-                    else if ((this.transform.position.x < collision.gameObject.transform.position.x))
-                    {
-                        state = (int)(Attack_Type.E_TAG_RIGHT);
-                    }
-                    attack = true;
-                }
-                //GameObject.Find("Player");
-            }
-        }
+        private Animator animator { get; set; } = null;
 
 
         // 初期化 / Initialize
         void Start()
         {
-            state = 0;
+            state = Attack_Type.E_WAIT;
             pos = new Vector2(0, 0);
             transform.Translate(pos.x, pos.y, 0.0f);
             timer = 0;
             attack = false;
+            spawn = true;
+            scale = new Vector3(e_scale, e_scale, e_scale);
+            animator = GetComponent<Animator>();
         }
 
 
@@ -64,61 +61,97 @@ namespace GameJam.Sho
         {
             switch (state)
             {
+                // 待機 / Wait
+                case Attack_Type.E_WAIT:
+                    animator.SetBool("taiki_flag", true);
+                    timer += (Time.deltaTime) * 1.0f;
+
+                    if (timer >= 1.0f)
+                    {
+                        animator.SetBool("taiki_flag", false);
+                        timer = 0;
+                        int rnd_dir = Random.Range(0, 1);
+                        spawn = false;
+                        switch (rnd_dir)
+                        {
+                            case 0:
+                                state = Attack_Type.E_LEFT;
+                                break;
+                            case 1:
+                                state = Attack_Type.E_RIGHT;
+                                break;
+                        }
+                    }
+                    break;
+
                 // 左右移動 / For Move
-                case (int)(Attack_Type.E_LEFT):
-                    timer += Time.deltaTime;
+                case Attack_Type.E_LEFT:
+                    animator.SetBool("run_flag", true);
+                    animator.SetBool("attack_flag", false);
+                   
+                    scale.x = -e_scale;
+                    timer += (Time.deltaTime) * 1.0f;
                     speed = -movespeed;
                     break;
 
-                case (int)(Attack_Type.E_RIGHT):
-                    timer += Time.deltaTime;
+                case Attack_Type.E_RIGHT:
+                    animator.SetBool("run_flag", true);
+                    animator.SetBool("attack_flag", false);
+                    
+                    scale.x = e_scale;
+                    timer += (Time.deltaTime) * 1.0f;
                     speed = movespeed;
                     break;
 
-                case (int)(Attack_Type.E_TAG_LEFT):
-                    timer += Time.deltaTime;
-                    speed = -0.1f;
+                // 攻撃（突進） / For attack（tackle attack）
+                case Attack_Type.E_ATTACK_LEFT:
+                    animator.SetBool("attack_flag", true);
+                    animator.SetBool("run_flag", false);
+                    scale.x = -e_scale;
+                    timer += (Time.deltaTime) * 1.0f;
+                    speed = -tackle_speed;
                     break;
 
-                case (int)(Attack_Type.E_TAG_RIGHT):
-                    timer += Time.deltaTime;
-                    speed = 0.1f;
-                    break;
-
-                // 攻撃（突進） / For attack（rush attack）
-                case (int)(Attack_Type.E_ATTACK_LEFT):
-                    speed = -0.5f;
-                    break;
-
-                case (int)(Attack_Type.E_ATTACK_RIGHT):
-                    speed = 0.5f;
+                case Attack_Type.E_ATTACK_RIGHT:
+                    animator.SetBool("attack_flag", true);
+                    animator.SetBool("run_flag", false);
+                    scale.x = e_scale;
+                    timer += (Time.deltaTime) * 1.0f;
+                    speed = tackle_speed;
                     break;
             }
 
 
-            // 突進攻撃終了 / Rush Attack End
-            if (attack && timer >= 1)
+            // 突進攻撃終了 / Tackle Attack End
+            if (attack && timer >= 2.0f)
             {
+                // animator.SetBool("attack_flag", false);
+                // animator.SetBool("run_flag", true);
+                animator.SetBool("attack_flag", false);
                 attack = false;
-                if (state == (int)(Attack_Type.E_TAG_LEFT)) state = (int)(Attack_Type.E_RIGHT);
-                else if (state == (int)(Attack_Type.E_TAG_RIGHT)) state = (int)(Attack_Type.E_LEFT);
+                timer = 0.0f;
+                if (state == Attack_Type.E_ATTACK_LEFT) state = Attack_Type.E_LEFT;
+                else if (state == Attack_Type.E_ATTACK_RIGHT) state = Attack_Type.E_RIGHT;
             }
             // 移動向き反転
-            else if (timer >= 1 + Random.Range(0, 0.05f))
+            else if (!attack && (timer >= 3.0f + Random.Range(0, 0.05f)) && !spawn)
             {
-                if (state == (int)(Attack_Type.E_LEFT)) state = (int)(Attack_Type.E_RIGHT);
-                else if (state == (int)(Attack_Type.E_RIGHT)) state = (int)(Attack_Type.E_LEFT);
+                // animator.SetBool("attack_flag", false);
+                // animator.SetBool("run_flag", true);
+
+                if (state == Attack_Type.E_LEFT) state = Attack_Type.E_RIGHT;
+                else if (state == Attack_Type.E_RIGHT) state = Attack_Type.E_LEFT;
                 timer = 0;
+                if (attack) attack = false;
             }
 
             // 画面端反転
-            if ((int)transform.position.x <= -10) { timer = 0; state = (int)(Attack_Type.E_RIGHT); }
-            else if ((int)transform.position.x >= 10) { timer = 0; state = (int)(Attack_Type.E_LEFT); }
+            if ((int)transform.position.x <= -10) { timer = 0; state = Attack_Type.E_RIGHT; }
+            else if ((int)transform.position.x >= 10) { timer = 0; state = Attack_Type.E_LEFT; }
 
 
-            // 突進 / Rush
+            // 移動速度更新
             transform.Translate(new Vector2(speed, 0));
-
 
             ///if (++timer == 300)
             ///{
@@ -128,7 +161,31 @@ namespace GameJam.Sho
             ///    transform.Translate(Random.Range(-5, 5), Random.Range(0, 10), 0.0f);
             ///}
 
+            transform.localScale = scale;
             transform.Translate(pos.x, pos.y, 0.0f);
+        }
+
+        //　一定距離近づいたら攻撃
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (!attack && !spawn)
+            {
+                if (collision.gameObject.tag == "Player")
+                {
+                    if ((this.transform.position.x > collision.gameObject.transform.position.x))
+                    {
+                        state = Attack_Type.E_ATTACK_LEFT;
+                    }
+                    else if ((this.transform.position.x < collision.gameObject.transform.position.x))
+                    {
+                        state = Attack_Type.E_ATTACK_RIGHT;
+                    }
+
+                    attack = true;
+                    //timer = 0;
+                }
+                //GameObject.Find("Player");
+            }
         }
     }
 }

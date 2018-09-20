@@ -1,28 +1,21 @@
 fileFormatVersion: 2
-guid: 81aefb2a0dbf57e44a991f7d9ea21c12
+guid: c2ddad6ad4d8b304eb5087e99b0787db
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Onirun_0
-    21300002: Onirun_1
-    21300004: Onirun_2
-    21300006: Onirun_3
-    21300008: Onirun_4
-    21300010: Onirun_5
-    21300012: Onirun_6
-    21300014: Onirun_7
-    21300016: Onirun_8
-    21300018: Onirun_9
-    21300020: Onirun_10
-    21300022: Onirun_11
-    21300024: Onirun_12
-    21300026: Onirun_13
-    21300028: Onirun_14
-    21300030: Onirun_15
-    21300032: Onirun_16
-    21300034: Onirun_17
-    21300036: Onirun_18
-    21300038: Onirun_19
-    21300040: Onirun_20
+    21300000: OniAttack_0
+    21300002: OniAttack_1
+    21300004: OniAttack_2
+    21300006: OniAttack_3
+    21300008: OniAttack_4
+    21300010: OniAttack_5
+    21300012: OniAttack_6
+    21300014: OniAttack_7
+    21300016: OniAttack_8
+    21300018: OniAttack_9
+    21300020: OniAttack_10
+    21300022: OniAttack_11
+    21300024: OniAttack_12
+    21300026: OniAttack_13
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -105,13 +98,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Onirun_0
+      name: OniAttack_0
       rect:
         serializedVersion: 2
-        x: 19
-        y: 1503
-        width: 422
-        height: 526
+        x: 20
+        y: 1493
+        width: 346
+        height: 535
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,19 +112,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0cf6a69bb38697c4cbf85efab9b51b3f
+      spriteID: 44404b35ae3a3cd4fbdff44a08a6c816
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Onirun_1
+      name: OniAttack_1
       rect:
         serializedVersion: 2
-        x: 464
-        y: 1504
-        width: 363
-        height: 525
+        x: 395
+        y: 1493
+        width: 350
+        height: 534
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,18 +132,118 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 39f2f1e2ed65dda46b040afaaf6a4b70
+      spriteID: cbc5b2cd61863dc4192f4367fe7ab1e0
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Onirun_2
+      name: OniAttack_2
       rect:
         serializedVersion: 2
-        x: 853
-        y: 1501
-        width: 291
+        x: 775
+        y: 1494
+        width: 353
+        height: 533
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 744a8d506c6573141a33b786b5c586c4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OniAttack_3
+      rect:
+        serializedVersion: 2
+        x: 1156
+        y: 1496
+        width: 354
+        height: 532
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00ec5f5a6d23fdc449858237d7bb514b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OniAttack_4
+      rect:
+        serializedVersion: 2
+        x: 1539
+        y: 1496
+        width: 356
+        height: 532
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0163a0e9f47b912498b765fae2e7b0ce
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OniAttack_5
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 933
+        width: 358
+        height: 530
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 628f09b0ca8f5fd4a86b59a8b9bdbdb7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OniAttack_6
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 932
+        width: 361
+        height: 531
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a247713ef54882f4cab35197f4f7cb43
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OniAttack_7
+      rect:
+        serializedVersion: 2
+        x: 794
+        y: 936
+        width: 366
         height: 528
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -159,19 +252,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a0582eee017f6e2469f748e897d05296
+      spriteID: f2ef055e7247b9141b540b80a35380ac
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Onirun_3
+      name: OniAttack_8
       rect:
         serializedVersion: 2
-        x: 1169
-        y: 1505
-        width: 295
-        height: 524
+        x: 1187
+        y: 938
+        width: 372
+        height: 526
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,19 +272,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 69fa6e969dcf1b34bbf43674cbcfdb15
+      spriteID: ed5880f7257201d44b04606a0210839d
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Onirun_4
+      name: OniAttack_9
       rect:
         serializedVersion: 2
-        x: 1482
-        y: 1517
-        width: 298
-        height: 514
+        x: 1588
+        y: 938
+        width: 381
+        height: 525
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -199,19 +292,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a1ae8d78bbf43db448defda63f3a6486
+      spriteID: 256816fca96d4e54596b592ea207180a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Onirun_5
+      name: OniAttack_10
       rect:
         serializedVersion: 2
-        x: 1805
-        y: 1519
-        width: 299
-        height: 513
+        x: 20
+        y: 380
+        width: 392
+        height: 523
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -219,278 +312,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 772a7b027052f1f48898dfcb193339a9
+      spriteID: 64b1004036fa6e1418d3e40360ffb53f
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Onirun_6
+      name: OniAttack_11
       rect:
         serializedVersion: 2
-        x: 2127
-        y: 1527
-        width: 296
-        height: 505
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a5601fb043fe2b84aa0fd42e8011b6a9
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Onirun_7
-      rect:
-        serializedVersion: 2
-        x: 2449
-        y: 1533
-        width: 330
-        height: 499
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 451ced4e24ebc0342b3de8383432877c
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Onirun_8
-      rect:
-        serializedVersion: 2
-        x: 2805
-        y: 1541
+        x: 438
+        y: 378
         width: 358
-        height: 488
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e6f1340c6bfcfec409fdb84c28422e65
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Onirun_9
-      rect:
-        serializedVersion: 2
-        x: 3189
-        y: 1551
-        width: 374
-        height: 479
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d4c133890f5649443841221915b87eb6
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Onirun_10
-      rect:
-        serializedVersion: 2
-        x: 3589
-        y: 1543
-        width: 356
-        height: 489
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a1ff789c9ef5dcc40bd6f13cc93edf62
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Onirun_11
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 983
-        width: 344
-        height: 494
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7841d457b0479754e9a3ceae96ba666c
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Onirun_12
-      rect:
-        serializedVersion: 2
-        x: 383
-        y: 975
-        width: 320
-        height: 500
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9eaeeac290f37944d8ec9f9154f271f4
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Onirun_13
-      rect:
-        serializedVersion: 2
-        x: 727
-        y: 972
-        width: 298
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 978e73ecddfebca498869b85e6d89b50
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Onirun_14
-      rect:
-        serializedVersion: 2
-        x: 1047
-        y: 960
-        width: 292
-        height: 515
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ca85ed979c504eb46aa4cb5704ce4a8f
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Onirun_15
-      rect:
-        serializedVersion: 2
-        x: 1360
-        y: 957
-        width: 295
-        height: 520
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e4c5efd751f9ed74db3fcef2696ec4d2
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Onirun_16
-      rect:
-        serializedVersion: 2
-        x: 1681
-        y: 951
-        width: 290
-        height: 524
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 694460e175e42d445b24e5897e2fe3e0
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Onirun_17
-      rect:
-        serializedVersion: 2
-        x: 1997
-        y: 945
-        width: 291
-        height: 532
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b8226893b52d9c04ab9053602f0146c1
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Onirun_18
-      rect:
-        serializedVersion: 2
-        x: 2311
-        y: 943
-        width: 298
-        height: 532
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9e64adab23f84bf47844c475f8d2a56c
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Onirun_19
-      rect:
-        serializedVersion: 2
-        x: 2635
-        y: 951
-        width: 368
         height: 526
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -499,18 +332,38 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2de081147667ff242858823dfeb8d341
+      spriteID: 71a09bec15b28424890bc5b628ed43d6
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Onirun_20
+      name: OniAttack_12
       rect:
         serializedVersion: 2
-        x: 3029
-        y: 949
-        width: 420
+        x: 825
+        y: 364
+        width: 363
+        height: 540
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6580b6e2b74b01f4ab60293670e8aec6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OniAttack_13
+      rect:
+        serializedVersion: 2
+        x: 1215
+        y: 378
+        width: 402
         height: 526
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -519,7 +372,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 978b0cb23e6566d409ca8f75bdd99b42
+      spriteID: b0af6a53e52cd8040b3b4e8459490ce9
       vertices: []
       indices: 
       edges: []
@@ -527,7 +380,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 9f1346c09841e4147af3c6d9fd11265d
+    spriteID: 3e01b9344c27aa94fab19c6cc2b6d1ca
     vertices: []
     indices: 
     edges: []
