@@ -19,10 +19,11 @@ namespace GameJam.Sho
             Wait,
             Damaged,
             Appear,
+            WaitHusuma,
         }
 
         [SerializeField, Header("ReadOnly For Debug")]
-        private State state = State.Appear;
+        private State state = State.WaitHusuma;
 
         [SerializeField]
         private GameObject lazerPrefab = null;
@@ -139,6 +140,12 @@ namespace GameJam.Sho
                        state = State.Wait;
                    });
                }).AddTo(this);
+
+            GameObject.Find("Husuma").GetComponent<Husuma>().HusumaCompleteEvent
+                .Subscribe(_ =>
+                {
+                    state = State.Wait;
+                }).AddTo(this);
         }
 
         private IEnumerator LightDisapp(Light light)

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 61019784162076768}
   - component: {fileID: 114974802625724810}
   - component: {fileID: 82248903740262090}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Lazer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4540564111633240}
   - component: {fileID: 96489458115035702}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}

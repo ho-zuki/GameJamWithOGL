@@ -20,7 +20,9 @@ namespace GameJam.Sho
 
         public void OnWindDestroyed()
         {
-            this.GetComponentInParent<Player>().IsOnGround = false;
+            var player = this.GetComponentInParent<Player>();
+            if (player == null) return;
+            player.IsOnGround = false;
         }
     }
 }

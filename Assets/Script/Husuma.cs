@@ -15,7 +15,8 @@ namespace GameJam.Sho
         public ISubject<Unit> _HusumaCompleteEvent { get; set; } = new Subject<Unit>();
         public IObservable<Unit> HusumaCompleteEvent => _HusumaCompleteEvent;
 
-        public bool IsClose { get; set; } = true;
+
+        public bool IsClose = true;
 
         // Use this for initialization
         void Start()
@@ -46,19 +47,21 @@ namespace GameJam.Sho
             this.UpdateAsObservable()
                 .Subscribe(_ =>
                 {
-                    t2 += speedRate * Time.deltaTime;
+                    if (Time.unscaledDeltaTime >= 1.0f) return;
+
+                    t2 += speedRate * Time.unscaledDeltaTime;
                     if (!s.isPlaying && t1 <= 1.0f && t2 <= 1.0f)
                     {
                         s.Play();
                     }
                     if (IsClose)
                     {
-                        t2 += speedRate * Time.deltaTime;
+                        t2 += speedRate * Time.unscaledDeltaTime;
                         L2.transform.position = Vector3.Lerp(L2.transform.position, L2Pos, t2);
                         R2.transform.position = Vector3.Lerp(R2.transform.position, R2Pos, t2);
                         if (t2 >= 0.5f)
                         {
-                            t1 += speedRate * Time.deltaTime;
+                            t1 += speedRate * Time.unscaledDeltaTime;
                             L1.transform.position = Vector3.Lerp(L1.transform.position, L1Pos, t1);
                             R1.transform.position = Vector3.Lerp(R1.transform.position, R1Pos, t1);
                         }
@@ -69,12 +72,16 @@ namespace GameJam.Sho
                         R2.transform.position = Vector3.Lerp(R2.transform.position, R0.transform.position, t2);
                         if (t2 >= 0.5f)
                         {
-                            t1 += speedRate * Time.deltaTime;
+                            t1 += speedRate * Time.unscaledDeltaTime;
                             L1.transform.position = Vector3.Lerp(L1.transform.position, L0.transform.position, t1);
                             R1.transform.position = Vector3.Lerp(R1.transform.position, R0.transform.position, t1);
                         }
                     }
-                    if (t1 >= 1.0f) _HusumaCompleteEvent.OnNext(Unit.Default);
+                    if (t1 >= 1.0f)
+                    {
+                        _HusumaCompleteEvent.OnNext(Unit.Default);
+                        GameObject.Destroy(this.gameObject, 1.0f);
+                    }
                 }).AddTo(this);
         }
     }

@@ -32,8 +32,8 @@ namespace GameJam.Sho
                         h.HusumaCompleteEvent
                         .Subscribe(__ =>
                         {
-                            SceneManager.LoadScene("Main");
-                        });
+                            SceneManager.LoadScene("FirstScene");
+                        }).AddTo(this);
                     });
                 }).AddTo(this);
         }
