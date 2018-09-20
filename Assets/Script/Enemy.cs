@@ -32,15 +32,15 @@ namespace GameJam.Sho
         // 大きさ / scale
         private const float e_scale = 0.5f;
         private Vector3 scale;
-
-        // アニメーションフラグ
-        ///private bool a_taikiflag, a_run_flag, a_attack_flag;
+        private bool dead_flag;
+        private float dead_timer;
 
         // 音声読み込み / Load from sound data.
         private AudioSource[] audios;
-        private AudioSource tackle_sound => audios[0];
-        private AudioSource destroy_sound => audios[1];
+        private AudioSource appear_sound => audios[0];
+        private AudioSource hit_sound => audios[1];
 
+        // アニメーション / Animation
         private Animator animator { get; set; } = null;
 
 
@@ -56,6 +56,10 @@ namespace GameJam.Sho
             scale = new Vector3(e_scale, e_scale, e_scale);
             animator = GetComponent<Animator>();
             animation_speed = 1.0f;
+            dead_timer = 0;
+
+            audios = this.GetComponents<AudioSource>();
+            appear_sound.Play();
         }
 
         void Update()
@@ -168,12 +172,20 @@ namespace GameJam.Sho
 
             transform.localScale = scale;
             transform.Translate(pos.x, pos.y, 0.0f);
+
+            if (dead_flag)
+            {
+                dead_timer += (Time.deltaTime) * 1.0f;
+                if (dead_timer > 0.3f)
+                {
+                    GameObject.Destroy(this.gameObject);
+                }
+            }
         }
 
         //　一定距離近づいたら攻撃
         private void OnTriggerEnter2D(Collider2D collision)
         {
-
             if (!attack && !spawn)
             {
                 if (collision.gameObject.tag == "Player")
@@ -187,8 +199,6 @@ namespace GameJam.Sho
                         state = Attack_Type.E_ATTACK_RIGHT;
                     }
 
-
-
                     attack = true;
                     timer = 0;
                 }
@@ -200,7 +210,12 @@ namespace GameJam.Sho
         {
             if ((this.transform.position - collision.gameObject.transform.position).magnitude < 1.5f)
             {
-                if (collision.gameObject.tag == "Player") GameObject.Destroy(this.gameObject);
+                if (collision.gameObject.tag == "Player")
+                {
+                    //GameObject.Destroy(this.gameObject);
+                    hit_sound.Play();
+                    dead_flag = true;
+                }
             }
         }
     }
