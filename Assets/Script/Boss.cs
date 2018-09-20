@@ -144,6 +144,7 @@ namespace GameJam.Sho
             GameObject.Find("Husuma").GetComponent<Husuma>().HusumaCompleteEvent
                 .Subscribe(_ =>
                 {
+                    this.GetComponent<Rigidbody2D>().gravityScale = 10;
                     state = State.Wait;
                 }).AddTo(this);
         }

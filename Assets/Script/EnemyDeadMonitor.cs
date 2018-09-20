@@ -17,9 +17,5 @@ namespace GameJam.Sho
                     GameObject.Destroy(this.gameObject);
                 }).AddTo(this);
         }
-        private void OnDestroy()
-        {
-            this.GetComponentInParent<Enemies>().Defeat();
-        }
     }
 }

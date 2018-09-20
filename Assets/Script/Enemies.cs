@@ -15,6 +15,7 @@ namespace GameJam.Sho
         [SerializeField]
         private GameObject husumaPrefabs = null;
 
+        private Husuma husuma = null;
         // Use this for initialization
         void Start()
         {
@@ -26,15 +27,16 @@ namespace GameJam.Sho
             childrenCount = this.transform.childCount;
         }
 
-        public void Defeat()
+        public void Update()
         {
-            childrenCount--;
+            if (husuma != null) return;
+            childrenCount = this.transform.childCount;
             if (childrenCount <= 0)
             {
-                var h = GameObject.Instantiate(husumaPrefabs).GetComponent<Husuma>();
-                h.transform.SetParent(GameObject.Find("UI").transform, false);
-                h.IsClose = true;
-                h.HusumaCompleteEvent
+                husuma = GameObject.Instantiate(husumaPrefabs).GetComponent<Husuma>();
+                husuma.transform.SetParent(GameObject.Find("UI").transform, false);
+                husuma.IsClose = true;
+                husuma.HusumaCompleteEvent
                 .Subscribe(__ =>
                 {
                     SceneManager.LoadScene(nextSceneName);

@@ -206,31 +206,13 @@ namespace GameJam.Sho
                         MotionController.JumpStop();
                     }
                 }).AddTo(this);
-
-            // test
-            this.UpdateAsObservable()
-                .Where(n => Input.GetKeyDown(KeyCode.D))
-                .Subscribe(_ =>
+            this.OnCollisionStay2DAsObservable()
+                .Where(n => n.gameObject.tag == "Enemy" || n.gameObject.tag == "Boss")
+                .Subscribe(hit =>
                 {
                     status.HP--;
                 }).AddTo(this);
-            // test
-            this.UpdateAsObservable()
-                .Where(n => Input.GetKeyDown(KeyCode.H))
-                .Subscribe(_ =>
-                {
-                    var h = GameObject.Instantiate(husuma).GetComponent<Husuma>();
-                    h.transform.SetParent(GameObject.Find("UI").transform, false);
-                    h.IsClose = true;
-                }).AddTo(this);
-            this.UpdateAsObservable()
-                .Where(n => Input.GetKeyDown(KeyCode.G))
-                .Subscribe(_ =>
-                {
-                    var h = GameObject.Instantiate(husuma).GetComponent<Husuma>();
-                    h.transform.SetParent(GameObject.Find("UI").transform, false);
-                    h.IsClose = false;
-                }).AddTo(this);
+
 
             status.DeadEvent
                 .Subscribe(_ =>

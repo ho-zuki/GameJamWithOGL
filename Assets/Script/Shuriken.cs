@@ -22,6 +22,11 @@ namespace GameJam.Sho
         {
             Rigidbody = this.GetComponent<Rigidbody2D>();
 
+            this.UpdateAsObservable()
+                .Subscribe(_ =>
+                {
+                    this.transform.Rotate(new Vector3(0, 0, 500.0f * Time.deltaTime));
+                }).AddTo(this);
             this.OnCollisionEnter2DAsObservable()
                 .Select(n => n.gameObject.GetComponent<Status>())
                 .Where(n => n != null)

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4224469618331162}
   - component: {fileID: 212393472706864860}
   - component: {fileID: 95464040419601976}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 70525100919101500}
   - component: {fileID: 82510074241569780}
   - component: {fileID: 82696218641375966}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.63}
+  m_Offset: {x: 0, y: 1}
   m_Size: {x: 4.82, y: 1}
   m_Direction: 0
 --- !u!82 &82510074241569780
@@ -352,7 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dde3e408c979b149946483ea7d1bfce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 1
+  hp: 100
 --- !u!212 &212393472706864860
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -215,6 +215,10 @@ Prefab:
       propertyPath: IsClose
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1867851508662520, guid: 1f4e700307f185a4e948c9b52efa3ec3, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f4e700307f185a4e948c9b52efa3ec3, type: 2}
   m_IsPrefabAsset: 0
@@ -1086,18 +1090,25 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 1380902931808448, guid: 60d5aaeae16bcf9418869a35c2e6d09b, type: 2}
-      propertyPath: m_Layer
-      value: 9
+    - target: {fileID: 50894566560726508, guid: 60d5aaeae16bcf9418869a35c2e6d09b,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 1267131684272946, guid: 60d5aaeae16bcf9418869a35c2e6d09b, type: 2}
-      propertyPath: m_Layer
-      value: 9
+    - target: {fileID: 50894566560726508, guid: 60d5aaeae16bcf9418869a35c2e6d09b,
+        type: 2}
+      propertyPath: m_GravityScale
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114452124577473312, guid: 60d5aaeae16bcf9418869a35c2e6d09b,
         type: 2}
       propertyPath: hp
-      value: 100
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 114228064873713034, guid: 60d5aaeae16bcf9418869a35c2e6d09b,
+        type: 2}
+      propertyPath: timerRateForLazer
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60d5aaeae16bcf9418869a35c2e6d09b, type: 2}
